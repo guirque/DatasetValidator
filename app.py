@@ -50,7 +50,7 @@ with st.container():
 
 
 def main(data_df):
-    st.write(f'# Dataset "*{st.session_state['ds']}*"')
+    st.write(f'# Dataset "*{st.session_state["ds"]}*"')
     with st.expander(label='Feedback'):
 
         st.write('Escolha as melhores opções de acordo com o raciocínio e a escolha de coberturas associados à imagem. Lembre-se de considerar todas as áreas destacadas.')
