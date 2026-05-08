@@ -40,16 +40,13 @@ if 'user_progress' not in st.session_state.keys():
 
 # Main -----------------------------------------
 
-with st.container():
-    save = st.button('Salvar Progresso', icon='💾', type='secondary')
-    if save:
-        objs = st.session_state['user_progress'].values() 
-        add_registers(objs)
-        st.write('✅ Salvo!')
-
-
-
 def main(data_df):
+    with st.container():
+        save = st.button('Salvar Progresso', icon='💾', type='secondary')
+        if save:
+            objs = st.session_state['user_progress'].values() 
+            add_registers(objs)
+            st.write('✅ Salvo!')
     st.write(f'# Dataset "*{st.session_state["ds"]}*"')
     with st.expander(label='Feedback'):
 
