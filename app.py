@@ -30,6 +30,7 @@ data = {
 #       "approved": True,
 #       "description": "Claro e aceitável.",
 #       "adequate_choices": True,
+#       "lang_error": False,
 #       "author": "Username",
 #       "img": "img_name.png"
 #    }
@@ -64,6 +65,7 @@ def main(data_df):
                 ]
             )
             adeq = st.checkbox(label='A escolha das coberturas foi adequada?')
+            lang = st.checkbox(label='Há erros de idioma ou de termos técnicos?')
             submit = st.form_submit_button(label='Registrar')
 
             if submit and 'last_img' in st.session_state.keys():
@@ -71,6 +73,7 @@ def main(data_df):
                     'approved': True if approv == 1 else False,
                     'description': desc,
                     'adequate_choices': adeq,
+                    'lang_error': lang,
                     'author': st.session_state['username'],
                     'img': st.session_state['last_img']
                 }
