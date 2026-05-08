@@ -146,12 +146,17 @@ def main(data_df):
 
             st.columns(3)[1].image(Image.open(results[group_index][0]), caption=img_name)
             for opt in re.findall(r'<opt>[\S\s]*?<\/opt>', region_string):
-                dom = parseString(opt)
-                treatment = dom.getElementsByTagName('treatment')[0].firstChild.nodeValue
-                reason = dom.getElementsByTagName('reason')[0].firstChild.nodeValue
+                try:
+                    dom = parseString(opt)
+                    treatment = dom.getElementsByTagName('treatment')[0].firstChild.nodeValue
+                    reason = dom.getElementsByTagName('reason')[0].firstChild.nodeValue
 
-                st.write(f'### Tratamento: {treatment}')
-                st.write(f'{reason}')
+                    st.write(f'### Tratamento: {treatment}')
+                    st.write(f'{reason}')
+                except:
+                    st.write('**Atenção: esta resposta não está formatada corretamente.** Por isso, não foi possível extrair uma lista de tratamentos e raciocínios. É possível que ela deva ser rejeitada de imediato.')
+                    st.write('Segue a resposta sem processamento:\n')
+                    st.code(opt)
         else:
              st.image(image)
     
