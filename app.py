@@ -91,7 +91,6 @@ def main(data_df):
                 def prev_func():
                     if st.session_state['main_slider'] > 0:
                         st.session_state['main_slider'] -= 1
-                        st.write('prev')
                 def next_func():
                     if st.session_state['main_slider'] < data_df.shape[0]-1:
                         st.session_state['main_slider'] += 1
