@@ -98,7 +98,7 @@ def main(data_df):
 
                 # https://discuss.streamlit.io/t/any-plan-to-support-the-value-of-sidebar-slider-update/16052/2
                 st.button(label='<', on_click=prev_func)
-                st.slider(label='', key='main_slider', min_value=0, max_value=data_df.shape[0]-1, bind='query-params')
+                st.slider(label='image', label_visibility='collapsed', key='main_slider', min_value=0, max_value=data_df.shape[0]-1, bind='query-params')
                 st.button(label='>', on_click=next_func)
     
         # Set variables
@@ -139,7 +139,7 @@ def main(data_df):
             if len(unique_groups) > 1:
                 with st.container(border=True):
                     st.write('Caixa de Localização (BBox)')
-                    bbox_index = st.slider(label='', min_value=0, max_value=len(unique_groups)-1)
+                    bbox_index = st.slider(label='bounding box', label_visibility='collapsed', min_value=0, max_value=len(unique_groups)-1)
 
             group_index = unique_groups[bbox_index]
             group_index = int(group_index)
