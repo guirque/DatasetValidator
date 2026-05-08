@@ -82,19 +82,21 @@ def main(data_df):
         if 'main_slider' not in st.session_state.keys():
             st.session_state['main_slider'] = 0
 
-        with st.container(horizontal=True, horizontal_alignment='distribute'):
-            def prev_func():
-                if st.session_state['main_slider'] > 0:
-                    st.session_state['main_slider'] -= 1
-                    st.write('prev')
-            def next_func():
-                if st.session_state['main_slider'] < data_df.shape[0]-1:
-                    st.session_state['main_slider'] += 1
+        with st.container(border=True):
+            st.write('Imagem Selecionada')
+            with st.container(horizontal=True, horizontal_alignment='distribute', vertical_alignment='center'):
+                def prev_func():
+                    if st.session_state['main_slider'] > 0:
+                        st.session_state['main_slider'] -= 1
+                        st.write('prev')
+                def next_func():
+                    if st.session_state['main_slider'] < data_df.shape[0]-1:
+                        st.session_state['main_slider'] += 1
 
-            # https://discuss.streamlit.io/t/any-plan-to-support-the-value-of-sidebar-slider-update/16052/2
-            st.button(label='<', on_click=prev_func)
-            st.slider(label='Image', key='main_slider', min_value=0, max_value=data_df.shape[0]-1, bind='query-params')
-            st.button(label='>', on_click=next_func)
+                # https://discuss.streamlit.io/t/any-plan-to-support-the-value-of-sidebar-slider-update/16052/2
+                st.button(label='<', on_click=prev_func)
+                st.slider(label='', key='main_slider', min_value=0, max_value=data_df.shape[0]-1, bind='query-params')
+                st.button(label='>', on_click=next_func)
     
         # Set variables
         row = data_df.iloc[st.session_state['main_slider']]
@@ -130,7 +132,11 @@ def main(data_df):
 
             unique_groups = np.unique(np.array(groups), return_index=True)[1]
 
-            bbox_index = st.slider(label='Bbox', min_value=0, max_value=len(unique_groups)-1) if len(unique_groups) > 1 else 0
+            bbox_index = 0
+            if len(unique_groups) > 1:
+                with st.container(border=True):
+                    st.write('Caixa de Localização (BBox)')
+                    bbox_index = st.slider(label='', min_value=0, max_value=len(unique_groups)-1)
 
             group_index = unique_groups[bbox_index]
             group_index = int(group_index)
