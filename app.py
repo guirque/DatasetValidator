@@ -64,7 +64,8 @@ def main(data_df):
                     'Incorreto.'
                 ]
             )
-            adeq = st.checkbox(label='A escolha das coberturas foi adequada?')
+            wrong_choice_found = st.checkbox(label='Alguma cobertura não deveria ter sido sugerida?')
+            missing_choice_found = st.checkbox(label='Faltou alguma cobertura relevante?')
             lang = st.checkbox(label='Há erros de idioma ou de termos técnicos?')
             submit = st.form_submit_button(label='Registrar')
 
@@ -72,7 +73,8 @@ def main(data_df):
                 st.session_state['user_progress'][st.session_state['last_img']] = {
                     'approved': True if approv == 1 else False,
                     'description': desc,
-                    'adequate_choices': adeq,
+                    'wrong_choice_found': wrong_choice_found,
+                    'missing_choice_found': missing_choice_found,
                     'lang_error': lang,
                     'author': st.session_state['username'],
                     'img': st.session_state['last_img']
